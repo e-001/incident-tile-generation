@@ -2,6 +2,9 @@
 
 In the interest of client performance, we generate a zoomable tileset with clustering pre-computed.
 
+[![a video introducing tippecanoe](docs/tip.gif "tippecanoe introduction")](https://www.loom.com/share/44187d495b2c4c91a3a45ad0c1c4792f)
+
+
 ## Dependencies
 - Install node packages with `yarn install`.
 - Install [tippecanoe](https://github.com/mapbox/tippecanoe#installation) `brew install tippecanoe`.
