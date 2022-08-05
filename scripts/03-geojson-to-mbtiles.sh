@@ -19,3 +19,5 @@ tile-join -R incidents:cluster -f -o data/cluster.mbtiles data/lowzoom.mbtiles d
 
 tippecanoe -f -zg --coalesce --drop-densest-as-needed \
     -o data/nocluster.mbtiles data/incidents.geojson
+
+tippecanoe -f -zg -o data/library.mbtiles data/library_items.geojson
