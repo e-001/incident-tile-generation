@@ -15,7 +15,7 @@ tippecanoe -f -r1 --cluster-distance 30 -Z8 -z15 --coalesce --accumulate-attribu
     -x year \
     -o data/highzoom.mbtiles data/incidents.geojson
 # Join them for upload
-tile-join -f -o data/cluster.mbtiles data/lowzoom.mbtiles data/highzoom.mbtiles
+tile-join -R incidents:cluster -f -o data/cluster.mbtiles data/lowzoom.mbtiles data/highzoom.mbtiles
 
 tippecanoe -f -zg --coalesce --drop-densest-as-needed \
     -o data/nocluster.mbtiles data/incidents.geojson
