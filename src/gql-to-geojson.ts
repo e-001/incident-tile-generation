@@ -1,6 +1,7 @@
-import { writeFileSync } from "fs"
+import log from "consola"
+import { mkdirSync, writeFileSync } from "fs"
 
-const raw = require('../data/output.json');
+const raw = require('../out/gql/result.json');
 const libraryItemFeatures = raw.data.library_item
   .map((s: any) => {
     var geojson = s.incident.feature
@@ -29,5 +30,11 @@ const libraryItemFeatureCollction = {
   features: libraryItemFeatures
 }
 
-writeFileSync("data/incidents.geojson", JSON.stringify(incidentFeatureCollection, null, 2));
-writeFileSync("data/library_items.geojson", JSON.stringify(libraryItemFeatureCollction, null, 2));
+mkdirSync('./out/geojson', {recursive: true})
+const incidentOutputPath = "./out/geojson/incident.geojson"
+const libraryOutputPath = "./out/geojson/library.geojson"
+writeFileSync(incidentOutputPath, JSON.stringify(incidentFeatureCollection, null, 2));
+log.info(`Wrote ${incidentFeatures.length} incident features to ${incidentOutputPath}`);
+
+writeFileSync(libraryOutputPath, JSON.stringify(libraryItemFeatureCollction, null, 2));
+log.info(`Wrote ${libraryItemFeatures.length} library item features to ${libraryOutputPath}`);

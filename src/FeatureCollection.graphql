@@ -1,0 +1,30 @@
+# Write your query or mutation here
+query FeatureCollection($limit: Int) @cached {
+  incident_survey(
+    where: { _and: [{ published: { _eq: true } }, { draft: { _eq: false } }] }
+    limit: $limit
+  ) {
+    feature
+
+    incident {
+      year
+    }
+  }
+
+  library_item(
+    where: {
+      _and: [
+        { incident: { id: { _is_null: false } } }
+        { published: { _eq: true } }
+      ]
+    }
+  ) {
+    id
+    title
+    cover_photo
+    incident {
+      id
+      feature
+    }
+  }
+}
