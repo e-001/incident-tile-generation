@@ -21,7 +21,7 @@ The `build-tileset.sh` script in the project root performs the necessary operati
 Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets. To install:
 1. `yarn global add mbview` or `npm i -g mbview`
 2. `$ export MAPBOX_ACCESS_TOKEN=...`
-2. `$ mbview data/out.mbtiles`
+2. `$ ./preview.sh`
 
 ## Outputs
 Generated and fetched outputs are in the `out` directory.
