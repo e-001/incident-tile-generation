@@ -38,3 +38,15 @@ Generated and fetched outputs are in the `out` directory.
     ├── lowzoom.mbtiles   // clustered, low zoom, no IDs
     └── nocluster.mbtiles // all incidents, unclustered
 ```
+
+## Deploy
+### Compose
+```
+$ export GRAPHQL_TOKEN="XXX"
+$ docker-compose up --build
+```
+### Docker
+```
+$ docker build -t tileset-gen .
+$ docker run --rm -v $PWD/out:/app/out -e GRAPHQL_TOKEN=${GRAPHQL_TOKEN} tileset-gen
+```

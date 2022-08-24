@@ -2,6 +2,8 @@ services:
   tileset-gen:
     build:
       dockerfile: Dockerfile
+      tags:
+        - "tileset-gen:latest"
     volumes:
       - $PWD/out:/app/out
     environment:
