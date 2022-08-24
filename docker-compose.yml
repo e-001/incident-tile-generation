@@ -1,0 +1,8 @@
+services:
+  tileset-gen:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - $PWD/out:/app/out
+    environment:
+      - GRAPHQL_TOKEN=${GRAPHQL_TOKEN}
