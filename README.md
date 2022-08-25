@@ -6,40 +6,26 @@ In the interest of client performance, we generate a zoomable tileset with clust
 
 
 ## Dependencies
-- Install node packages with `yarn install`. Install graphqurl globally with `yarn global add graphqurl`.
+- Install node dependencies with `yarn install`. Install graphqurl globally with `yarn global add graphqurl`.
 - Install [tippecanoe](https://github.com/mapbox/tippecanoe#installation)
 - Set the `GRAPHQL_TOKEN` env variable to match the admin secret.
-- To upload live tiles to mapbox, set `MAPBOX_ACCESS_TOKEN` to a secret API token.
+- To upload live tiles to mapbox, set `MAPBOX_ACCESS_TOKEN` to a secret token.
 
 ## Running
-The `run.sh` script performs the sequential bash scripts d in `src`. See the component scripts for implementation.
+The `run.sh` script performs the sequential bash scripts in `src`. See the component scripts for implementation.
 
-1. `01-gql-fetch.sh` Download incident survey features via GQL.
-2. `02-gql-to-geojson.sh` Converts the features to a FeatureCollection.
-3. `03-geojson-to-mbtiles.sh` Generates an MBTile file from the passed collection.
+1. `01-gql-fetch.sh` Download incident and library features via GQL.
+2. `02-gql-to-geojson.sh` Convert the GQL response to GeoJSON FeatureCollections.
+3. `03-geojson-to-mbtiles.sh` Generate MBTile files from the incident and library GeoJSON.
 
-The upload script, `04-upload-tilesets.sh`, is run manually.
+The upload script (`04-upload-tilesets.sh`) is run manually.
 
 ## Preview generated tiles
 Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets.
-1. `$ yarn global add mbview` or `$ npm i -g mbview`
-2. `$ export MAPBOX_ACCESS_TOKEN=pk.xyz # use a public key!`
-2. `$ mbview ./out/mbtiles/{cluster.mbtiles,library.mbtiles}`
-
-## Outputs
-Generated and fetched outputs are in the `out` directory.
 ```
-├── geojson
-│   ├── incident.geojson  // fetched incidents mapped to geojson
-│   └── library.geojson   // ibid., library
-├── gql
-│   └── result.json       // raw gql result
-└── mbtiles
-    ├── cluster.mbtiles   // clustered incidents, uploaded
-    ├── highzoom.mbtiles  // clustered incidents, high zoom, includes IDs
-    ├── library.mbtiles   // library, unclustered, uploaded
-    ├── lowzoom.mbtiles   // clustered, low zoom, no IDs
-    └── nocluster.mbtiles // all incidents, unclustered, with years, uploaded
+$ yarn global add mbview
+$ export MAPBOX_ACCESS_TOKEN=pk.xyz # use a public key!
+$ mbview ./out/mbtiles/{cluster.mbtiles,library.mbtiles}
 ```
 
 ## Deploy
@@ -58,3 +44,20 @@ Publishing to Mapbox uploads the generated tilesets to Mapbox, replacing those u
  ```
 
 The Mapbox token must have tileset and upload write permissions.
+
+
+## Outputs
+Generated and fetched outputs are in the `out` directory.
+```
+├── geojson
+│   ├── incident.geojson  // fetched incidents mapped to geojson
+│   └── library.geojson   // ibid., library
+├── gql
+│   └── result.json       // raw gql result
+└── mbtiles
+    ├── cluster.mbtiles   // clustered incidents, uploaded
+    ├── highzoom.mbtiles  // clustered incidents, high zoom, includes IDs
+    ├── library.mbtiles   // library, unclustered, uploaded
+    ├── lowzoom.mbtiles   // clustered, low zoom, no IDs
+    └── nocluster.mbtiles // all incidents, unclustered, with years, uploaded
+```
