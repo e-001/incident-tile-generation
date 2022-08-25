@@ -1,7 +1,7 @@
 services:
   tileset-gen:
     build:
-      dockerfile: Dockerfile
+      context: .
       tags:
         - "tileset-gen:latest"
     volumes:

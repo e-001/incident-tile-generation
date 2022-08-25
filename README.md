@@ -12,7 +12,7 @@ In the interest of client performance, we generate a zoomable tileset with clust
 - To upload live tiles to mapbox, set `MAPBOX_ACCESS_TOKEN` to a secret API token.
 
 ## Running
-The `build-tileset.sh` script in the project root performs the necessary operations. See the component scripts in the `src/` dir for implementation.
+The `run.sh` script performs the sequential bash scripts d in `src`. See the component scripts for implementation.
 
 1. `01-gql-fetch.sh` Download incident survey features via GQL.
 2. `02-gql-to-geojson.sh` Converts the features to a FeatureCollection.
@@ -21,7 +21,7 @@ The `build-tileset.sh` script in the project root performs the necessary operati
 The upload script, `04-upload-tilesets.sh`, is run manually.
 
 ## Preview generated tiles
-Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets. To install:
+Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets.
 1. `$ yarn global add mbview` or `$ npm i -g mbview`
 2. `$ export MAPBOX_ACCESS_TOKEN=pk.xyz # use a public key!`
 2. `$ mbview ./out/mbtiles/{cluster.mbtiles,library.mbtiles}`
@@ -37,25 +37,20 @@ Generated and fetched outputs are in the `out` directory.
 └── mbtiles
     ├── cluster.mbtiles   // clustered incidents, uploaded
     ├── highzoom.mbtiles  // clustered incidents, high zoom, includes IDs
-    ├── library.mbtiles   // library, unclustered, upload
+    ├── library.mbtiles   // library, unclustered, uploaded
     ├── lowzoom.mbtiles   // clustered, low zoom, no IDs
     └── nocluster.mbtiles // all incidents, unclustered, with years, uploaded
 ```
 
 ## Deploy
-### Compose
-```
-$ export GRAPHQL_TOKEN="XXX"
-$ docker-compose up --build
-```
 ### Docker
 ```
 $ docker build -t tileset-gen .
 $ docker run --rm -v $PWD/out:/app/out -e GRAPHQL_TOKEN=${GRAPHQL_TOKEN} tileset-gen
 ```
 
-## Publishing to Mapbox Server
-Publishing to Mapbox uploads the generated tilesets to Mapbox, replacing those used by Enigma applications. It is **not** run by default. This replaces existing tilesets with the generated  files in `out/mbtiles`.
+### Publishing to Mapbox Server
+Publishing to Mapbox uploads the generated tilesets to Mapbox, replacing those used by Enigma applications. It is **not** run by default. This replaces production tilesets with the generated  files in `out/mbtiles`.
 
 ```
  $ export MAPBOX_ACCESS_TOKEN="sk.xyz123"
