@@ -14,6 +14,7 @@ echo
 echo "ℹ Writing incident mbtiles without accumulated ids for low zooms to ${OUT_DIR}/lowzoom.mbtiles..."
 tippecanoe -f -r1 --cluster-distance 30 -Z0 -z8 --coalesce \
     -x year \
+    -x incident_id \
     -o ${OUT_DIR}/lowzoom.mbtiles ${SRC_DIR}/incidents.geojson
 # Keep incident_id intact above z8 for cluster expansion with accumulate-attribute store concat'd incident_ids
 echo
