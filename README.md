@@ -7,8 +7,9 @@ In the interest of client performance, we generate a zoomable tileset with clust
 
 ## Dependencies
 - Install node packages with `yarn install`. Install graphqurl globally with `yarn global add graphqurl`.
-- Install [tippecanoe](https://github.com/mapbox/tippecanoe#installation) `brew install tippecanoe`.
+- Install [tippecanoe](https://github.com/mapbox/tippecanoe#installation)
 - Set the `GRAPHQL_TOKEN` env variable to match the admin secret.
+- To upload live tiles to mapbox, set `MAPBOX_ACCESS_TOKEN` to a secret API token.
 
 ## Running
 The `build-tileset.sh` script in the project root performs the necessary operations. See the component scripts in the `src/` dir for implementation.
@@ -21,9 +22,9 @@ The upload script, `04-upload-tilesets.sh`, is run manually.
 
 ## Preview generated tiles
 Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets. To install:
-1. `yarn global add mbview` or `npm i -g mbview`
-2. `$ export MAPBOX_ACCESS_TOKEN=...`
-2. `$ ./preview.sh`
+1. `$ yarn global add mbview` or `$ npm i -g mbview`
+2. `$ export MAPBOX_ACCESS_TOKEN=pk.xyz # use a public key!`
+2. `$ mbview ./out/mbtiles/{cluster.mbtiles,library.mbtiles}`
 
 ## Outputs
 Generated and fetched outputs are in the `out` directory.
@@ -61,4 +62,4 @@ Publishing to Mapbox uploads the generated tilesets to Mapbox, replacing those u
  $ ./src/04-upload-tilesets.sh
  ```
 
-The Mapbox token must have tileset and data write permissions.
+The Mapbox token must have tileset and upload write permissions.
