@@ -50,3 +50,13 @@ $ docker-compose up --build
 $ docker build -t tileset-gen .
 $ docker run --rm -v $PWD/out:/app/out -e GRAPHQL_TOKEN=${GRAPHQL_TOKEN} tileset-gen
 ```
+
+## Publishing to Mapbox Server
+Publishing to Mapbox uploads the generated tilesets to Mapbox, replacing those used by Enigma applications. It is **not** run by default. This replaces existing tilesets with the generated  files in `out/mbtiles`.
+
+```
+ $ export MAPBOX_ACCESS_TOKEN="sk.xyz123"
+ $ ./src/04-upload-tilesets.sh
+ ```
+
+The Mapbox token must have tileset and data write permissions.

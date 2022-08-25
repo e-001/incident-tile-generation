@@ -31,7 +31,7 @@ const libraryItemFeatureCollction = {
 }
 
 mkdirSync('./out/geojson', {recursive: true})
-const incidentOutputPath = "./out/geojson/incident.geojson"
+const incidentOutputPath = "./out/geojson/incidents.geojson"
 const libraryOutputPath = "./out/geojson/library.geojson"
 writeFileSync(incidentOutputPath, JSON.stringify(incidentFeatureCollection, null, 2));
 log.info(`Wrote ${incidentFeatures.length} incident features to ${incidentOutputPath}`);
