@@ -7,12 +7,12 @@ NOCLUSTER_TILESET_ID=enigmalabs.93c8pnuy
 LIBRARY_TILESET_ID=enigmalabs.9ioxb10o
 
 populate_env_aws_credentials() {
-    S3_CREDENTIALS_CLUSTER=$(curl -X POST "https://api.mapbox.com/uploads/v1/enigmalabs/credentials?access_token=${MAPBOX_ACCESS_TOKEN}")
-    BUCKET=$(echo "$S3_CREDENTIALS_CLUSTER" | jq -r '.bucket')
-    KEY=$(echo "$S3_CREDENTIALS_CLUSTER" | jq -r '.key')
-    AWS_ACCESS_KEY_ID=$(echo "$S3_CREDENTIALS_CLUSTER" | jq -r '.accessKeyId')
-    AWS_SECRET_ACCESS_KEY=$(echo "$S3_CREDENTIALS_CLUSTER" | jq -r '.secretAccessKey')
-    AWS_SESSION_TOKEN=$(echo "$S3_CREDENTIALS_CLUSTER" | jq -r '.sessionToken')
+    S3_CREDENTIALS=$(curl -X POST "https://api.mapbox.com/uploads/v1/enigmalabs/credentials?access_token=${MAPBOX_ACCESS_TOKEN}")
+    BUCKET=$(echo "$S3_CREDENTIALS" | jq -r '.bucket')
+    KEY=$(echo "$S3_CREDENTIALS" | jq -r '.key')
+    AWS_ACCESS_KEY_ID=$(echo "$S3_CREDENTIALS" | jq -r '.accessKeyId')
+    AWS_SECRET_ACCESS_KEY=$(echo "$S3_CREDENTIALS" | jq -r '.secretAccessKey')
+    AWS_SESSION_TOKEN=$(echo "$S3_CREDENTIALS" | jq -r '.sessionToken')
     export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN BUCKET KEY
 }
 

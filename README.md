@@ -17,6 +17,8 @@ The `build-tileset.sh` script in the project root performs the necessary operati
 2. `02-gql-to-geojson.sh` Converts the features to a FeatureCollection.
 3. `03-geojson-to-mbtiles.sh` Generates an MBTile file from the passed collection.
 
+The upload script, `04-upload-tilesets.sh`, is run manually.
+
 ## Preview generated tiles
 Use [`mbview`](https://github.com/mapbox/mbview) to preview generated tilesets. To install:
 1. `yarn global add mbview` or `npm i -g mbview`
@@ -32,11 +34,11 @@ Generated and fetched outputs are in the `out` directory.
 ├── gql
 │   └── result.json       // raw gql result
 └── mbtiles
-    ├── cluster.mbtiles   // clustered incidents
+    ├── cluster.mbtiles   // clustered incidents, uploaded
     ├── highzoom.mbtiles  // clustered incidents, high zoom, includes IDs
-    ├── library.mbtiles   // library, unclustered
+    ├── library.mbtiles   // library, unclustered, upload
     ├── lowzoom.mbtiles   // clustered, low zoom, no IDs
-    └── nocluster.mbtiles // all incidents, unclustered
+    └── nocluster.mbtiles // all incidents, unclustered, with years, uploaded
 ```
 
 ## Deploy
